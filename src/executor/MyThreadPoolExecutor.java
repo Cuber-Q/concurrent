@@ -20,6 +20,7 @@ public class MyThreadPoolExecutor {
 				, TimeUnit.SECONDS
 				, new ArrayBlockingQueue<Runnable>(50) 	//工作阻塞队列，最大100
 				, Executors.defaultThreadFactory()			
+				, new ThreadPoolExecutor.DiscardPolicy());	//超出队列容量的任务的丢弃策略.丢弃任务，但是不抛出异常。
 //				, new LinkedBlockingQueue<Runnable>());//排队队列，链式结构的阻塞队列,入列出列快，但是同时会产生Node对象
 		
 		ArrayList<Task> tasks = new ArrayList<>();
@@ -36,6 +37,7 @@ public class MyThreadPoolExecutor {
 				// TODO Auto-generated method stub
 				try {
 					System.out.println("prepare to shutdown executor...");
+					Thread.currentThread().sleep(2 * 1000);
 				
 					/**
 					 * shutdownNow()强制停止正在执行的任务线程
