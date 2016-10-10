@@ -50,7 +50,7 @@ public class NewCachedThreadPoolExample {
 		example.activeThreadsNum();
 		example.service();
 		example.activeThreadsNum();
-		Thread.currentThread().sleep(120 * 1000);
+		Thread.currentThread().sleep(60 * 1000);
 		System.out.println("\r\n");
 		example.activeThreadsNum();
 		example.service();
@@ -89,23 +89,4 @@ public class NewCachedThreadPoolExample {
 		}
 	}
 }
-class Task implements Callable<String>{
-	public static AtomicInteger cnt = new AtomicInteger(0);
-	@Override
-	public String call() throws Exception {
-		// TODO Auto-generated method stub
-		/*
-		 * 如果任务比较耗时，线程池会不断创建新的线程
-		 * 不怎么耗时的话，会尽量让线程复用
-		 */
-//		Thread.currentThread().sleep(1000);
-		for(int i=0;i<1000000000;i++){
-			
-		}
-		Thread.currentThread().interrupt();
-		return Thread.currentThread().getName()
-				+"_____"+String.valueOf(cnt.incrementAndGet())
-				+"_____"+ String.valueOf(System.currentTimeMillis());
-	}
-	
-}
+
