@@ -17,14 +17,14 @@ public class Task implements Callable<String>{
 //		for(int i=0;i<1000000000;i++){
 //			
 //		}
-		Thread.currentThread().interrupt();
+//		Thread.currentThread().interrupt();
 		
 		//test executor.shutdown()
 		System.out.println( Thread.currentThread().getName()
 				+"_____"+String.valueOf(cntTemp.incrementAndGet())
 				+"_____"+ String.valueOf(System.currentTimeMillis())
 				+"_____running");
-		
+//		Thread.currentThread().sleep(2000);
 		return Thread.currentThread().getName()
 				+"_____"+String.valueOf(cnt.incrementAndGet())
 				+"_____"+ String.valueOf(System.currentTimeMillis());

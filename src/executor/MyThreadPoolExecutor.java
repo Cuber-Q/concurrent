@@ -14,8 +14,8 @@ public class MyThreadPoolExecutor {
 	
 	public static void main(String[] args) throws Exception{
 		ThreadPoolExecutor executor = new ThreadPoolExecutor
-				(4						//corePoolSize 核心线程池大小
-				, 20					//整个线程池最大规模
+				(0						//corePoolSize 核心线程池大小
+				, 100					//整个线程池最大规模
 				, 20					//核心池【外】的【空闲线程】存活最大时间 
 				, TimeUnit.SECONDS
 				, new ArrayBlockingQueue<Runnable>(50) 	//工作阻塞队列，最大100
@@ -42,7 +42,7 @@ public class MyThreadPoolExecutor {
 					/**
 					 * shutdownNow()强制停止正在执行的任务线程
 					 */
-//					executor.shutdownNow();
+					executor.shutdownNow();
 					/**
 					 * shutdown()会等待队列里的任务执行完毕
 					 */
@@ -50,7 +50,9 @@ public class MyThreadPoolExecutor {
 					/**
 					 * 
 					 */
-					System.out.println(executor.awaitTermination(1L, TimeUnit.SECONDS));
+					System.out.println(executor.awaitTermination(20L, TimeUnit.SECONDS));
+					executor.submit(new Task());
+					Thread.currentThread().stop();
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -64,8 +66,8 @@ public class MyThreadPoolExecutor {
 		
 		
 		System.out.println("executing end....."+System.currentTimeMillis());
-//		for(Future<String> future : futures){
-//			System.out.println(future.get());
-//		}
+		for(Future<String> future : futures){
+			System.out.println(future.get());
+		}
 	}
 }	
